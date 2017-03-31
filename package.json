@@ -1,0 +1,28 @@
+{
+  "name": "to-do-app",
+  "version": "1.0.0",
+  "description": "small todo application",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/milotiger/to-do-app.git"
+  },
+  "keywords": [
+    "todo"
+  ],
+  "author": "TriNguyen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/milotiger/to-do-app/issues"
+  },
+  "homepage": "https://github.com/milotiger/to-do-app#readme",
+  "dependencies": {
+    "async": "^2.2.0",
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "mongoose": "^4.9.2"
+  }
+}
