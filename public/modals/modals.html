@@ -1,0 +1,64 @@
+<!--modals-->
+<div class="modal fade" id="category-modal" ng-controller="CategoryCtr">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ModalData.Action}} Category</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="submit()" name="categoryForm">
+                    <div class="form-group">
+                        <label for="input-category">Category Name</label>
+                        <input required type="text" class="form-control" id="input-category" placeholder="Category Name" name="CategoryName" ng-model="ModalData.Category.CategoryName">
+                        <small class="alert-warning" ng-show="categoryForm.CategoryName.$error.required">Name is required</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="description-category">Category Description</label>
+                        <input type="text" class="form-control" id="description-category" placeholder="Category Description" name="CategoryDescription" ng-model="ModalData.Category.CategoryDescription">
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-disabled="!categoryForm.$valid">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--item modal-->
+<div class="modal fade" id="item-modal" ng-controller="ItemCtr">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ModalData.Action}} Category</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="submit()" name="itemForm">
+                    <div class="form-group">
+                        <label for="input-category">Item Name</label>
+                        <input required type="text" class="form-control" id="input-item" placeholder="Item Name" name="ItemName" ng-model="ModalData.Item.ItemName">
+                        <small class="alert-warning" ng-show="itemForm.ItemName.$error.required">Name is required</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="description-category">Item Description</label>
+                        <input type="text" class="form-control" id="description-item" placeholder="Item Description" name="ItemDescription" ng-model="ModalData.Item.ItemDescription">
+                    </div>
+                    <div class="form-group">
+                        <label for="category-select">Select Category</label>
+                        <select class="form-control" id="category-select" name="CategorySelect" ng-model="ModalData.Item.Category" required>
+                            <option value="{{Category._id}}" ng-repeat="Category in ModalData.Categories">{{Category.CategoryName}}</option>
+                        </select>
+                        <small class="alert-warning" ng-show="itemForm.CategorySelect.$error.required">Category is required</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-disabled="!itemForm.$valid">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

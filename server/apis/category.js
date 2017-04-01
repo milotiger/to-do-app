@@ -28,7 +28,9 @@ router.get('/:id', (req, res)=> {
                 })
             },
             Items: function (done) {
-                itemModel.find({Category: id}, (err, result)=> {
+                itemModel.find({Category: id})
+                    .sort({ModifiedAt: -1})
+                    .exec((err, result)=> {
                     if (err)
                         return done(err);
                     done(null, result);
@@ -61,12 +63,12 @@ router.post('/', (req, res)=>{
         return res.status(400).json({message: 'information_missed'});
     }
     let NewCategory = new categoryModel(body);
-    NewCategory.save(function (err) {
+    NewCategory.save(function (err, result) {
         if (err && err.code == 11000)
             return res.status(400).json({message: 'name_existed'});
         if (err)
             return res.status(500).json(err);
-        return res.status(200).json({message: 'added_done'});
+        return res.status(200).json({message: 'added_done', id: result._id});
     })
 });
 
@@ -77,8 +79,13 @@ router.delete('/:id', (req, res)=>{
             return done(err);
         if (result == null)
             return res.status(404).json({message: 'not_found'});
-        return res.status(200).json({message: 'deleted_done'});
-    })
+        itemModel.remove({Category: id}, function (err, result) {
+            if (err)
+                console.log(err);
+            return res.status(200).json({message: 'deleted_done', count: result.result.n});
+        })
+    });
+
 });
 
 module.exports = router;

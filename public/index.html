@@ -1,1 +1,71 @@
-<p>ok! I'm fine</p>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css">
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body ng-app="app" ng-controller="appCtr">
+<div class="container">
+    <h1 class="centered">Welcome to Todo App</h1>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+            <th>
+                <span>Categories</span>
+                <a role="button" class="btn btn-success" ng-click="OpenModal('#category-modal', {Action: 'Add'})">Add</a>
+            </th>
+            <th>
+                <span>Todo in {{CurrentCategory.CategoryName}}</span>
+                <a role="button" class="btn btn-success" ng-click="OpenModal('#item-modal', {Action: 'Add', Categories: Categories, Item:{Category: CurrentCategory._id}})">Add</a>
+            </th>
+            <th>Todo detail</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <div ng-repeat="Category in Categories" >
+                        <a class="btn btn-primary" role="button" ng-click="OpenModal('#category-modal', {Action: 'Edit', Category: Category})">Edit</a>
+                        <a role="button" class="btn btn-danger" ng-click="deleteCategory(Category._id)">Delete</a>
+                        <a role="button" ng-click="chooseCategory(Category._id)">{{Category.CategoryName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div ng-repeat="Item in CategoryItems">
+                        <a class="btn btn-primary" role="button" ng-click="OpenModal('#item-modal', {Action: 'Edit', Item: Item, Categories: Categories})">Edit</a>
+                        <a role="button" class="btn btn-danger" ng-click="deleteItem(Item._id)">Delete</a>
+                        <a role="button" ng-click="chooseItem(Item._id)">{{Item.ItemName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div ng-show="CurrentItem">
+                        <h2>{{CurrentItem.ItemName}}</h2>
+                        <p><strong>Description: </strong>{{CurrentItem.ItemDescription}}</p>
+                        <p><strong>Created: </strong>{{TimeConvert(CurrentItem.CreatedAt)}}</p>
+                        <p><strong>Last modified: </strong>{{TimeConvert(CurrentItem.ModifiedAt)}}</p>
+                        <p><strong>Category: </strong><a href="" ng-click="chooseCategory(CurrentItem.Category._id)">{{CurrentItem.Category.CategoryName}}</a></p>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<ng-include src="'./modals/modals.html'"></ng-include>
+
+<div class="loader" ng-show="isWait"></div>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/sweetalert/dist/sweetalert.min.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-resource/angular-resource.min.js"></script>
+<script src="app/app.module.js"></script>
+<script src="app/app.service.js"></script>
+<script src="app/app.controller.js"></script>
+<script src="app/app.category.controller.js"></script>
+<script src="app/app.item.controller.js"></script>
+</body>
+</html>

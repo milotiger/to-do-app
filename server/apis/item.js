@@ -42,12 +42,12 @@ router.post('/', (req, res)=>{
         return res.status(400).json({message: 'information_missed'});
     }
     let NewItem = new itemModel(body);
-    NewItem.save(function (err) {
+    NewItem.save(function (err, result) {
         if (err && err.code == 11000)
             return res.status(400).json({message: 'name_existed'});
         if (err)
             return res.status(500).json(err);
-        return res.status(200).json({message: 'added_done'});
+        return res.status(200).json({message: 'added_done', id: result._id});
     })
 });
 

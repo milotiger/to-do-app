@@ -1,0 +1,38 @@
+.centered {
+    text-align: center;
+}
+
+/*PreLoader*/
+
+.loader {
+    border: 7px solid #eaeaea;
+    border-radius: 50%;
+    border-bottom: 7px solid #5BC1AF;
+    width: 60px;
+    height: 60px;
+    -webkit-animation: spin 0.75s linear infinite;
+    animation: spin 0.75s linear infinite;
+    position: fixed;
+    right: 50%;
+    top: 50%;
+    z-index: 100;
+    /*margin:*/
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
